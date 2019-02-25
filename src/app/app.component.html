@@ -4,7 +4,7 @@
     {{ title }}!
   </h1>
   <h2>
-    {{conf?._user}}
+    {{_confService?.conf.data._user}}
   </h2>
   <div>
     <label for="user">user</label>
@@ -23,6 +23,7 @@
     <input id="hotelKey" #hotel_key type="text" placeholder="Nombre">
     <button (click)="changer('_hotel_key')">Establecer</button>
   </div>
+  <button (click)="changeThis()">FFFF</button>
 
 
 <router-outlet></router-outlet>
