@@ -17,11 +17,6 @@ export class CurrentConfig{
     }
   }
 
-  cuestionario:cuestionario={
-    id:0,
-    name:"",
-  }
-
   changes:Subject<any> = new Subject<any>();
 
   constructor(){
@@ -42,7 +37,7 @@ export class CurrentConfig{
   providedIn: 'root'
 })
 export class ConfService {
-  conf:CurrentConfig;
+  conf:any;
 
   constructor() {
     this.conf = new CurrentConfig();
@@ -60,4 +55,6 @@ export class ConfService {
     localStorage.setItem("conf",confMod);
     //console.log("conf",confMod);
   }
+
+
 }

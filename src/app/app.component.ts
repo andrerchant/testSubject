@@ -31,5 +31,11 @@ export class AppComponent{
     this.changer("Postre",postre);
   }
 
+  //This automatic sets on LS when set a property
+  otro(){
+    this._confService.conf._user="Mother";
+    console.log("done");
+  }
+
 
 }
