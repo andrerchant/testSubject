@@ -10,35 +10,27 @@ export interface data{
 
 class CurrentConfig{
 
-
   data:data={
     _user:"",
     _score:0,
     _hotel_key:"",
     _sections:[]
   }
+
   changes:Subject<any> = new Subject<any>();
 
-  constructor(){  }
-
-  set user(val_user:string){
-    this.data._user = val_user;
-    this.changes.next(this.data);
+  constructor(){
+    for(let key in this.data){
+      Object.defineProperty(this,key,{
+        get: () => { return this.data[key]; },
+        set: (value:any) => {
+          this.data[key] = value;
+          this.changes.next(this.data);
+          console.log("setting/retrieving data");
+        }
+      })
+    }
   }
-  set score(val_score:number){
-    this.data._score = val_score;
-    this.changes.next(this.data);
-
-  }
-  set hotel_key(val_hotel_key:string){
-    this.data._hotel_key = val_hotel_key;
-    this.changes.next(this.data);
-  }
-
-  get user(){ return this.data._user}
-  get score(){ return this.data._score}
-  get hotel_key(){ return this.data._hotel_key}
-
 }
 
 @Component({
@@ -50,21 +42,23 @@ export class AppComponent{
   title = 'testingsub';
   conf:CurrentConfig;
 
-  @ViewChild("user") user_input : ElementRef;
-  @ViewChild("score") score_input : ElementRef;
-  @ViewChild("hotel_key") hotel_key_input : ElementRef;
+  @ViewChild("user") _user_input : ElementRef;
+  @ViewChild("score") _score_input : ElementRef;
+  @ViewChild("hotel_key") _hotel_key_input : ElementRef;
 
   constructor(){
     this.conf = new CurrentConfig();
     this.conf.changes
     .subscribe(
       res=>{
+        console.log("Data has changed");
         this.saveData(res);
-      }
+      },err=>{console.log("err: ",err)},()=>{console.log("finished subscribe")}
     )
   }
   changer(type:string){
     this.conf[type] = this[`${type}_input`].nativeElement.value;
+    console.log("this.conf[type]",this.conf[type]);
   }
 
   saveData(val){

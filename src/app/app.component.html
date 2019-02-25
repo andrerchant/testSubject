@@ -4,24 +4,24 @@
     {{ title }}!
   </h1>
   <h2>
-    {{conf?.user}}
+    {{conf?._user}}
   </h2>
   <div>
     <label for="user">user</label>
     <input id="user" #user type="text" placeholder="Nombre">
-    <button (click)="changer('user')">Llamar</button>
+    <button (click)="changer('_user')">Llamar</button>
   </div>
 
   <div>
     <label for="score">score</label>
     <input id="score" #score type="text" placeholder="Nombre">
-    <button (click)="changer('score')">Cambiar</button>
+    <button (click)="changer('_score')">Cambiar</button>
   </div>
 
   <div>
     <label for="hotelKey">hotelKey</label>
     <input id="hotelKey" #hotel_key type="text" placeholder="Nombre">
-    <button (click)="changer('hotel_key')">Establecer</button>
+    <button (click)="changer('_hotel_key')">Establecer</button>
   </div>
 
 
